@@ -1,10 +1,11 @@
-#pragma once
+#ifndef JUL_MAP_EXT_H
+#define JUL_MAP_EXT_H
 
 #include <map>
 #include <vector>
 
-namespace jul 
-{
+namespace jul {
+
     // ---------------------------------------------------------------------------------
     // Does a map contain a certain key? This function will NOT create that value in the map.
     // example:
@@ -82,3 +83,6 @@ namespace jul
         return {keys, values};
     }
 }
+
+
+#endif // JUL_MAP_EXT_H

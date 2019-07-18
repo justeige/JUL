@@ -6,8 +6,8 @@
 #include <cassert>
 
 
-namespace jul {
-
+namespace jul 
+{
     // ---------------------------------------------------------------------------------
     // Does a vector contain a certain value?
     // example:
@@ -175,7 +175,7 @@ namespace jul {
     // auto limited = within_limits(ints, 0, 1);
     //
     // => limited = {0,1,0}
-    // ---------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------    
     template <class T>
     std::vector<T> within_limits(std::vector<T> values, T min, T max)
     {
@@ -193,7 +193,7 @@ namespace jul {
     // auto outside = out_of_limits(ints, 0, 1);
     //
     // => outside = {3}
-    // ---------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------- 
     template <class T>
     std::vector<T> out_of_limits(std::vector<T> values, T min, T max)
     {
@@ -203,7 +203,7 @@ namespace jul {
     }
 
 
-
+    
     // ---------------------------------------------------------------------------------
     // Calculate the mean value of some values.
     // ---------------------------------------------------------------------------------

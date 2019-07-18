@@ -1,5 +1,4 @@
-#ifndef JUL_RING_H
-#define JUL_RING_H
+#pragma once
 
 #include <array>
 #include <algorithm>
@@ -8,7 +7,7 @@ namespace jul {
 
     // ---------------------------------------------------------------
     // Ring (class) = static circular buffer
-    // Pushes values on top like an array but overwrites values from
+    // Pushes values on top like an array but overwrites values from 
     // the beginning after going over the buffer-size.
     // Allocates an std::array of static size.
     // ---------------------------------------------------------------
@@ -21,12 +20,12 @@ namespace jul {
         // member types
         using value_type      = T;
         using size_type       = decltype(Size);
-        using difference_type = std::ptrdiff_t;
-        using reference       = value_type&;
+        using difference_type =	std::ptrdiff_t;
+        using reference 	  = value_type&;
         using const_reference = const value_type &;
-        using pointer         = value_type*;
+        using pointer 	      = value_type*;
         using const_pointer   = const value_type*;
-        using iterator        = typename std::array<T, Size>::iterator;
+        using iterator 	      = typename std::array<T, Size>::iterator;
 
         // constructor
         Ring() {}
@@ -51,7 +50,7 @@ namespace jul {
                 m_index = 0;
                 return true;
             }
-
+            
             // just append to buffer
             m_index++;
             return false;
@@ -61,7 +60,7 @@ namespace jul {
         bool contains(const_reference value)
         {
             for (auto v : m_buffer) {
-                if (v == value) { return true; }
+                if (v == value) return true;
             }
             return false;
         }
@@ -92,12 +91,12 @@ namespace jul {
         size_type           m_index  = 0;
     };
 
-// ----------------
-// Free functions
-// ----------------
-
+    // ----------------
+    // Free functions 
+    // ----------------
+    
     // ----------------------------------------------------------------
-    // Create a ring:
+    // Create a ring: 
     // Ring<int, 3> ring = make_ring<int>(1,2,3);
     // or
     // auto ring = make_ring<int>(1,2,3);
@@ -109,15 +108,11 @@ namespace jul {
         return jul::Ring<T, Size> { { std::forward<Params>(params)... }};
     }
 
-
-
     template <class T, std::size_t Size>
     bool contains(const Ring<T, Size>& ring, const T& value)
     {
         return ring.conains(value);
     }
-
-
 
     template <class T, std::size_t SizeA, std::size_t SizeB>
     Ring<T, SizeA + SizeB> operator + (const Ring<T, SizeA>& a, const Ring<T, SizeB>& b)
@@ -128,5 +123,3 @@ namespace jul {
         return combined;
     }
 }
-
-#endif // JUL_RING_H

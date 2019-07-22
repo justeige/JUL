@@ -29,11 +29,11 @@ namespace jul {
         static_assert(!std::is_same<TLeft, TRight>::value, "Types can't be the same!");
 
         // constructors
-        constexpr Either(const TLeft& value) : m_is_left{ true }, m_left_value{ value } {}
-        constexpr Either(TLeft&& value) : m_is_left{ true }, m_left_value{ std::move(value) } {}
+        constexpr Either(const TLeft& value) : m_is_left { true }, m_left_value { value } {}
+        constexpr Either(TLeft&& value)      : m_is_left { true }, m_left_value { std::move(value) } {}
 
-        constexpr Either(const TRight& value) : m_is_left{ false }, m_right_value{ value } {}
-        constexpr Either(TRight&& value) : m_is_left{ false }, m_right_value{ std::move(value) } {}
+        constexpr Either(const TRight& value) : m_is_left { false }, m_right_value{ value } {}
+        constexpr Either(TRight&& value)     : m_is_left  { false }, m_right_value{ std::move(value) } {}
 
         // desctructor; manual calling the destructor of a type looks a bit weird, but is allowed
         ~Either()

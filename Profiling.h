@@ -5,7 +5,7 @@
 #if defined(_DEBUG) || defined(DEBUG)
 #define measure_time() jul::detail::Scope_Timer scope_timer {__func__, std::cout}
 #else
-#define measure_time() do {} while(false)
+#define measure_time() ((void)0)
 #endif
 
 namespace jul {

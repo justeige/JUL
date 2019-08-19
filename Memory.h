@@ -129,7 +129,6 @@ namespace jul {
         assert(new_mem == nullptr); // sanity check
     }
 
-
 }
 
 

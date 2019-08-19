@@ -1,6 +1,5 @@
-#ifndef JUL_VARIANT_H
-#define JUL_VARIANT_H
-
+#ifndef JUL_SET_H
+#define JUL_SET_H
 
 /*
 MIT License
@@ -27,30 +26,33 @@ SOFTWARE.
 */
 
 
-namespace jul 
+#include <set>
+#include <unordered_set>
+
+namespace jul
 {
-
-    template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
-    template<class... Ts> overloaded(Ts...)->overloaded<Ts...>;
-
-    // ---------------------------------------------------------------------------------------
-    // match: A nicer syntax for visiting variants... should be a keyword in c++... 
+    // ---------------------------------------------------------------------------------
+    // Does a set contain a certain value?
     // example:
+    // std::set<int> ints = { 0,1,2,3 };
+    // bool has_two = contains(ints, 2);
     //
-    // std::variant<int, float, std::string> ifs{ "Should be 2" };
-    // int val = jul::match(ifs,
-    //    [](const int& i)         -> int { return 0;},
-    //    [](const float& f)       -> int { return 1;},
-    //    [](const std::string& s) -> int { return 2;}
-    // );
-    // => val = 2
-    // ---------------------------------------------------------------------------------------
-    template <typename Variant, typename... Cases>
-    auto match(Variant&& variant, Cases&& ... cases)
+    // => has_two = true
+    // ---------------------------------------------------------------------------------
+    template <class T>
+    bool contains(const std::set<T>& s, const T& value)
     {
-        return std::visit(overloaded{ std::forward<Cases>(cases)... }, std::forward<Variant>(variant));
+        auto last = std::end(s);
+        return s.find(value) != last;
+    }
+
+    template <class T>
+    bool contains(const std::unordered_set<T>& s, const T& value)
+    {
+        auto last = std::end(s);
+        return s.find(value) != last;
     }
 
 }
 
-#endif // JUL_VARIANT_H
+#endif // JUL_SET_H

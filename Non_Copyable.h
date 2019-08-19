@@ -1,6 +1,5 @@
-#ifndef JUL_VARIANT_H
-#define JUL_VARIANT_H
-
+#ifndef JUL_NON_COPYABLE_H
+#define JUL_NON_COPYABLE_H
 
 /*
 MIT License
@@ -26,31 +25,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
+// -------------------------------------------------------------------
+// Base class/trait for all non-copyable classes.
+// -------------------------------------------------------------------
 namespace jul 
 {
 
-    template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
-    template<class... Ts> overloaded(Ts...)->overloaded<Ts...>;
+    class Non_Copyable {
+    protected:
+        Non_Copyable()  = default;
+        ~Non_Copyable() = default;
 
-    // ---------------------------------------------------------------------------------------
-    // match: A nicer syntax for visiting variants... should be a keyword in c++... 
-    // example:
-    //
-    // std::variant<int, float, std::string> ifs{ "Should be 2" };
-    // int val = jul::match(ifs,
-    //    [](const int& i)         -> int { return 0;},
-    //    [](const float& f)       -> int { return 1;},
-    //    [](const std::string& s) -> int { return 2;}
-    // );
-    // => val = 2
-    // ---------------------------------------------------------------------------------------
-    template <typename Variant, typename... Cases>
-    auto match(Variant&& variant, Cases&& ... cases)
-    {
-        return std::visit(overloaded{ std::forward<Cases>(cases)... }, std::forward<Variant>(variant));
-    }
+        Non_Copyable(const Non_Copyable& other) = delete;
+        Non_Copyable(Non_Copyable&& other)      = delete;
+
+        Non_Copyable& operator=(const Non_Copyable& other) = delete;
+        Non_Copyable& operator=(Non_Copyable&& other)      = delete;
+    };
 
 }
 
-#endif // JUL_VARIANT_H
+#endif // JUL_NON_COPYABLE_H

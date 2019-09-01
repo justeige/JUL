@@ -1,7 +1,6 @@
 #ifndef JUL_PROFILING_H
 #define JUL_PROFILING_H
 
-
 /*
 MIT License
 
@@ -26,6 +25,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <chrono>
 
 // helper macros to create a scope timer
 #if defined(_DEBUG) || defined(DEBUG)

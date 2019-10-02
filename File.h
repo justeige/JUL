@@ -31,6 +31,7 @@ SOFTWARE.
 #include <string>
 #include <cassert>
 #include <cstdio>
+#include <vector>
 
 namespace jul 
 {

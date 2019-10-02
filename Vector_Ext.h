@@ -85,52 +85,6 @@ namespace jul
 
 
     // ---------------------------------------------------------------------------------
-    // Wrapper for std::sort for a complete vector.
-    // ---------------------------------------------------------------------------------
-    template <class T>
-    void sort(std::vector<T>& v)
-    {
-        std::sort(std::begin(v), std::end(v));
-    }
-
-
-
-    // ---------------------------------------------------------------------------------
-    // Wrapper for std::sort for a complete vector with a custom predicate.
-    // ---------------------------------------------------------------------------------
-    template <class T, class Predicate>
-    void sort(std::vector<T>& v, Predicate&& pred)
-    {
-        std::sort(std::begin(v), std::end(v), pred);
-    }
-
-
-
-    // ---------------------------------------------------------------------------------
-    // Wrapper for std::sort for a complete vector, returns a copy of the vector.
-    // ---------------------------------------------------------------------------------
-    template <class T>
-    std::vector<T> sorted(std::vector<T> v)
-    {
-        std::sort(std::begin(v), std::end(v));
-        return v;
-    }
-
-
-
-    // ---------------------------------------------------------------------------------
-    // Wrapper for std::sort for a complete vector, returns a copy and uses a custom predicate.
-    // ---------------------------------------------------------------------------------
-    template <class T, class Predicate>
-    std::vector<T> sorted(std::vector<T> v, Predicate&& pred)
-    {
-        std::sort(std::begin(v), std::end(v), pred);
-        return v;
-    }
-
-
-
-    // ---------------------------------------------------------------------------------
     // Wrapper for std::transform for a complete vector.
     // ---------------------------------------------------------------------------------
     template <class T, class Function>

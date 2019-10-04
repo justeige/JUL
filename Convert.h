@@ -65,6 +65,18 @@ namespace jul
             return std::nullopt;
         }
     }
+    
+    
+    
+    // ---------------------------------------------------------------------------
+    // Cast an enum value to its underlying type.
+    // ---------------------------------------------------------------------------
+    template <class Enum>
+    constexpr std::underlying_type_t<Enum> to_underlying(Enum value) noexcept 
+    {
+        static_assert(std::is_enum<Enum>::value, "Value has to be an enum!");
+        return static_cast<std::underlying_type_t<Enum>>(value);
+    }
 }
 
 #endif // JUL_PARSING_H

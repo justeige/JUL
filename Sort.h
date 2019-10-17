@@ -38,7 +38,7 @@ namespace jul
 
     // -------------------------------------------------------------------------------
     // Best case:  Almost sorted array.  -> O(n)
-    // Worst case: Reverse sorted array. -> O(n²)
+    // Worst case: Reverse sorted array. -> O(nÂ²)
     // This algo can outperform std::sort for a large, almost sorted array like container.
     // (Profile your application!!!)
     // -------------------------------------------------------------------------------
@@ -129,6 +129,71 @@ namespace jul
     {
         std::sort(std::execution::par, std::begin(c), std::end(c), pred);
         return c;
+    }
+    
+
+
+    // ---------------------------------
+    // Functor for x > y
+    // ---------------------------------
+    template <class T>
+    auto greater_than(const T& value)
+    {
+        return [value](const T& n) {
+            return n > value;
+        };
+    }
+
+
+
+    // ---------------------------------
+    // Functor for x < y
+    // ---------------------------------
+    template <class T>
+    auto less_than(const T& value)
+    {
+        return [value](const T& n) {
+            return n < value;
+        };
+    }
+
+
+
+    // ---------------------------------
+    // Functor for x == y
+    // ---------------------------------
+    template <class T>
+    auto equal_to(const T& value)
+    {
+        return [value](const T& n) {
+            return n == value;
+        };
+    }
+
+
+
+    // ---------------------------------
+    // Functor for x >= y
+    // ---------------------------------    
+    template <class T>
+    auto greater_equal_than(const T& value)
+    {
+        return [value](const T& n) {
+            return n >= value;
+        };
+    }
+
+
+
+    // ---------------------------------
+    // Functor for x <= y
+    // ---------------------------------
+    template <class T>
+    auto less_equal_than(const T& value)
+    {
+        return [value](const T& n) {
+            return n <= value;
+        };
     }
 }
 

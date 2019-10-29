@@ -29,10 +29,37 @@ SOFTWARE.
 #include <vector>
 #include <algorithm>
 #include <cassert>
+#include <numeric>
 
 
 namespace jul 
 {
+    // ---------------------------------------------------------------------------------
+	// Flatten a vector of vectors.
+	// Example:
+	// std::vector<int> a{ 1,2,3 }, b{ 4,5,6 };
+	// std::vector<std::vector<int>> vec_vec { a, b };
+	//
+	// auto flattened = jul::flatten(vec_vec);
+	// => flattened = { 1, 2, 3, 4, 5, 6 }
+	// ---------------------------------------------------------------------------------
+	template <typename T>
+	std::vector<T> flatten(const std::vector<std::vector<T>>& v) 
+	{
+		auto total_size = 0U;
+		for (const auto& sub : v) {
+			total_size += sub.size();
+		}
+
+		std::vector<T> result;
+		result.reserve(total_size);
+		for (const auto& sub : v) {
+			result.insert(std::end(result), std::begin(sub), std::end(sub));
+		}
+		return result;
+	}
+    
+    
     // ---------------------------------------------------------------------------------
     // Does a vector contain a certain value?
     // example:
@@ -180,7 +207,45 @@ namespace jul
         values.erase(std::remove_if(std::begin(values), std::end(values), filter), std::end(values));
         return values;
     }
+    
+    
+    
+    // ---------------------------------------------------------------------------------
+	// Creates a std::vector<T> filled with (ascending) values.
+	// Example: 
+	// auto vec = jul::make_vector(-3, 3);
+	// vec == { -3, -2, -1, 0, 1, 2, 3 }
+	// ---------------------------------------------------------------------------------
+	template <class T>
+	constexpr std::vector<T> make_vector(const T& start_value, const T& end_value)
+	{
+		auto size = (end_value  - start_value) + 1; // including the right border!
+		assert(size >= 0 && "Invalid range!");
 
+		std::vector<T> range(size);
+		std::iota(std::begin(range), std::end(range), start_value);
+		return range;
+	}
+
+
+
+	// ---------------------------------------------------------------------------------
+	// Creates a std::vector<T> filled with (descending) values.
+	// Example: 
+	// auto vec = jul::make_rvector(0, 4);
+	// vec == { 4, 3, 2, 1, 0 }
+	// ---------------------------------------------------------------------------------
+	template <class T>
+	constexpr std::vector<T> make_rvector(const T& end_value, const T& start_value)
+	{
+		auto size = (end_value - start_value) + 1; // including the right border!
+		assert(size >= 0 && "Invalid range!");
+
+		std::vector<T> range(size);
+		std::iota(std::rbegin(range), std::rend(range), start_value);
+		return range;
+	}
+    
 
     
     // ---------------------------------------------------------------------------------

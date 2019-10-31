@@ -91,6 +91,18 @@ namespace jul {
     private:
         T* m_ptr;
     };
+    
+	
+    
+	// factory method like std::make_unique, std::make_shared...
+	template <class T>
+	Scoped<T> make_scoped(T* ptr)
+	{
+		return Scoped { ptr };
+	}
+    
+    
+    
 }
 
 #endif // JUL_POINTER_H

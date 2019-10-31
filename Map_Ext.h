@@ -106,6 +106,23 @@ namespace jul
         }
         return {keys, values};
     }
+    
+    
+    
+    // ---------------------------------------------------------------------------------
+	// Factory method for a map.
+	// Example:
+	// auto m = make_map<int, std::string>({
+	//     {1, "one"},
+	//     {2, "two"},
+	//     {3, "three"}
+	// });
+	// ---------------------------------------------------------------------------------
+	template <class Key, class Value>
+	std::map<Key, Value> make_map(const std::initializer_list<std::pair<Key, Value>>& kvp)
+	{
+		return { std::begin(kvp), std::end(kvp) };
+	}
 }
 
 #endif // JUL_MAP_EXT_H

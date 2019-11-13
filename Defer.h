@@ -35,7 +35,7 @@ SOFTWARE.
 //     /* other code */    
 // } <- at function end, the defer-block will be called!
 // ---------------------------------------------------------------------------------
-#define defer(func) auto JUL_DEFER_UNIQUE_NAME = jul::detail::Deferred { []() { func } }
+#define defer(func) auto JUL_DEFER_UNIQUE_NAME = jul::detail::Deferred { []() { func ; } }
 
 
 

@@ -31,8 +31,7 @@ SOFTWARE.
 #include <cassert>
 #include <type_traits>
 
-namespace jul
-{
+namespace jul {
     // ----------------------------------------------------------------------------------------------
     // The following functions are wrapper for C++ complicated random library.
     // ATTENTION! Those functions aren't really the best practises for using those random functions,
@@ -42,7 +41,7 @@ namespace jul
 
     // ----------------------------------------------------------------------------
     // Get a random int from a certain range of ints.
-    // Example: 
+    // Example:
     // long value = random_int<long>(0, 10);
     // => value = 5
     // ----------------------------------------------------------------------------
@@ -83,8 +82,7 @@ namespace jul
         std::uniform_int_distribution<> dist{ min, max };
 
         std::vector<Integer> v;
-        for (std::size_t n = 0; n < num_of_ints; ++n)
-        {
+        for (std::size_t n = 0; n < num_of_ints; ++n) {
             v.push_back(dist(mt));
         }
         return v;
@@ -111,6 +109,28 @@ namespace jul
         return dist(mt);
     }
 
+
+
+    // ----------------------------------------------------------------------------
+    // Shuffle a range with an (optional) seed value.
+    // ----------------------------------------------------------------------------
+    template <class Container>
+    void shuffle(Container& c, const unsigned int seed_value = std::default_random_engine::default_seed)
+    {
+        std::shuffle(std::begin(c), std::end(c), std::default_random_engine{ seed_value });
+    }
+
+
+
+    // ----------------------------------------------------------------------------
+    // Get a shuffled range with an (optional) seed value.
+    // ----------------------------------------------------------------------------
+    template <class Container>
+    Container shuffled(Container c, const unsigned int seed_value = std::default_random_engine::default_seed)
+    {
+        std::shuffle(std::begin(c), std::end(c), std::default_random_engine{ seed_value });
+        return c;
+    }
 }
 
 #endif // JUL_RANDOM_H
